@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Video Background */
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* Video Overlay for better text readability */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.85) 0%, 
+                rgba(255, 255, 255, 0.75) 50%, 
+                rgba(255, 255, 255, 0.85) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Enhanced Animated Particles */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: #1A1b21;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .particle:nth-child(1) { width: 3px; height: 3px; top: 15%; left: 8%; animation: float1 8s ease-in-out infinite; }
+        .particle:nth-child(2) { width: 2px; height: 2px; top: 35%; left: 18%; animation: float2 12s ease-in-out infinite; }
+        .particle:nth-child(3) { width: 4px; height: 4px; top: 55%; left: 12%; animation: float3 10s ease-in-out infinite; }
+        .particle:nth-child(4) { width: 2px; height: 2px; top: 25%; left: 75%; animation: float4 9s ease-in-out infinite; }
+        .particle:nth-child(5) { width: 3px; height: 3px; top: 65%; left: 85%; animation: float5 11s ease-in-out infinite; }
+        .particle:nth-child(6) { width: 2px; height: 2px; top: 45%; left: 92%; animation: float6 7s ease-in-out infinite; }
+        .particle:nth-child(7) { width: 3px; height: 3px; top: 85%; left: 22%; animation: float7 13s ease-in-out infinite; }
+        .particle:nth-child(8) { width: 2px; height: 2px; top: 5%; left: 65%; animation: float8 8s ease-in-out infinite; }
+        .particle:nth-child(9) { width: 4px; height: 4px; top: 95%; left: 55%; animation: float9 14s ease-in-out infinite; }
+        .particle:nth-child(10) { width: 2px; height: 2px; top: 20%; left: 48%; animation: float10 6s ease-in-out infinite; }
+        .particle:nth-child(11) { width: 3px; height: 3px; top: 70%; left: 68%; animation: float11 10s ease-in-out infinite; }
+        .particle:nth-child(12) { width: 2px; height: 2px; top: 40%; left: 38%; animation: float12 9s ease-in-out infinite; }
+        .particle:nth-child(13) { width: 3px; height: 3px; top: 80%; left: 78%; animation: float13 11s ease-in-out infinite; }
+        .particle:nth-child(14) { width: 2px; height: 2px; top: 50%; left: 88%; animation: float14 8s ease-in-out infinite; }
+        .particle:nth-child(15) { width: 4px; height: 4px; top: 10%; left: 28%; animation: float15 12s ease-in-out infinite; }
+        .particle:nth-child(16) { width: 2px; height: 2px; top: 60%; left: 5%; animation: float16 15s ease-in-out infinite; }
+        .particle:nth-child(17) { width: 3px; height: 3px; top: 30%; left: 95%; animation: float17 7s ease-in-out infinite; }
+        .particle:nth-child(18) { width: 2px; height: 2px; top: 75%; left: 45%; animation: float18 9s ease-in-out infinite; }
+        .particle:nth-child(19) { width: 4px; height: 4px; top: 12%; left: 82%; animation: float19 11s ease-in-out infinite; }
+        .particle:nth-child(20) { width: 2px; height: 2px; top: 90%; left: 15%; animation: float20 13s ease-in-out infinite; }
+
+        /* Enhanced Particle Animations */
+        @keyframes float1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(35px, -25px) scale(1.3); } 66% { transform: translate(-20px, 45px) scale(0.7); } }
+        @keyframes float2 { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(-30px, 35px) scale(0.8); } 75% { transform: translate(45px, -15px) scale(1.2); } }
+        @keyframes float3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(25px, 40px) scale(1.4); } }
+        @keyframes float4 { 0%, 100% { transform: translate(0, 0) scale(1); } 40% { transform: translate(-40px, -30px) scale(0.6); } 80% { transform: translate(30px, 50px) scale(1.3); } }
+        @keyframes float5 { 0%, 100% { transform: translate(0, 0) scale(1); } 60% { transform: translate(50px, -35px) scale(1.2); } }
+        @keyframes float6 { 0%, 100% { transform: translate(0, 0) scale(1); } 30% { transform: translate(-25px, 30px) scale(0.9); } 70% { transform: translate(35px, -20px) scale(1.3); } }
+        @keyframes float7 { 0%, 100% { transform: translate(0, 0) scale(1); } 45% { transform: translate(40px, 25px) scale(1.1); } }
+        @keyframes float8 { 0%, 100% { transform: translate(0, 0) scale(1); } 35% { transform: translate(-35px, -40px) scale(0.8); } 65% { transform: translate(45px, 30px) scale(1.4); } }
+        @keyframes float9 { 0%, 100% { transform: translate(0, 0) scale(1); } 55% { transform: translate(-30px, -45px) scale(0.7); } }
+        @keyframes float10 { 0%, 100% { transform: translate(0, 0) scale(1); } 20% { transform: translate(55px, 20px) scale(1.3); } 80% { transform: translate(-40px, -25px) scale(0.8); } }
+        @keyframes float11 { 0%, 100% { transform: translate(0, 0) scale(1); } 40% { transform: translate(30px, -30px) scale(1.2); } }
+        @keyframes float12 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-45px, 35px) scale(0.6); } }
+        @keyframes float13 { 0%, 100% { transform: translate(0, 0) scale(1); } 65% { transform: translate(35px, -40px) scale(1.4); } }
+        @keyframes float14 { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(-50px, 45px) scale(0.7); } 75% { transform: translate(25px, -35px) scale(1.3); } }
+        @keyframes float15 { 0%, 100% { transform: translate(0, 0) scale(1); } 35% { transform: translate(40px, 30px) scale(1.2); } 70% { transform: translate(-30px, -45px) scale(0.8); } }
+        @keyframes float16 { 0%, 100% { transform: translate(0, 0) scale(1); } 42% { transform: translate(60px, -20px) scale(1.1); } 84% { transform: translate(-25px, 55px) scale(0.9); } }
+        @keyframes float17 { 0%, 100% { transform: translate(0, 0) scale(1); } 28% { transform: translate(-55px, 25px) scale(1.3); } 72% { transform: translate(40px, -50px) scale(0.7); } }
+        @keyframes float18 { 0%, 100% { transform: translate(0, 0) scale(1); } 38% { transform: translate(35px, 45px) scale(1.2); } 76% { transform: translate(-40px, -15px) scale(0.8); } }
+        @keyframes float19 { 0%, 100% { transform: translate(0, 0) scale(1); } 52% { transform: translate(-30px, -55px) scale(1.4); } 26% { transform: translate(50px, 35px) scale(0.6); } }
+        @keyframes float20 { 0%, 100% { transform: translate(0, 0) scale(1); } 47% { transform: translate(45px, -25px) scale(1.1); } 23% { transform: translate(-35px, 40px) scale(0.9); } }
+
+        /* Enhanced Connection Lines */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(26, 27, 33, 0.3), transparent);
+            height: 1px;
+            transform-origin: left center;
+        }
+
+        .line:nth-child(1) { top: 20%; left: 10%; width: 140px; transform: rotate(45deg); animation: lineMove1 6s ease-in-out infinite; }
+        .line:nth-child(2) { top: 65%; left: 75%; width: 100px; transform: rotate(-35deg); animation: lineMove2 8s ease-in-out infinite; }
+        .line:nth-child(3) { top: 45%; left: 35%; width: 120px; transform: rotate(65deg); animation: lineMove3 7s ease-in-out infinite; }
+        .line:nth-child(4) { top: 85%; left: 15%; width: 110px; transform: rotate(-20deg); animation: lineMove4 9s ease-in-out infinite; }
+        .line:nth-child(5) { top: 25%; left: 70%; width: 130px; transform: rotate(80deg); animation: lineMove5 5s ease-in-out infinite; }
+        .line:nth-child(6) { top: 55%; left: 5%; width: 90px; transform: rotate(-50deg); animation: lineMove6 10s ease-in-out infinite; }
+        .line:nth-child(7) { top: 35%; left: 85%; width: 115px; transform: rotate(25deg); animation: lineMove7 6s ease-in-out infinite; }
+        .line:nth-child(8) { top: 75%; left: 50%; width: 105px; transform: rotate(-75deg); animation: lineMove8 8s ease-in-out infinite; }
+        .line:nth-child(9) { top: 15%; left: 45%; width: 95px; transform: rotate(55deg); animation: lineMove9 7s ease-in-out infinite; }
+        .line:nth-child(10) { top: 90%; left: 80%; width: 85px; transform: rotate(-10deg); animation: lineMove10 9s ease-in-out infinite; }
+
+        @keyframes lineMove1 { 0%, 100% { opacity: 0.1; transform: rotate(45deg) scale(1); } 50% { opacity: 0.5; transform: rotate(45deg) scale(1.2) translateX(15px); } }
+        @keyframes lineMove2 { 0%, 100% { opacity: 0.15; transform: rotate(-35deg) scale(1); } 50% { opacity: 0.6; transform: rotate(-35deg) scale(1.1) translateX(-10px); } }
+        @keyframes lineMove3 { 0%, 100% { opacity: 0.1; transform: rotate(65deg) scale(1); } 50% { opacity: 0.4; transform: rotate(65deg) scale(1.3) translateX(20px); } }
+        @keyframes lineMove4 { 0%, 100% { opacity: 0.2; transform: rotate(-20deg) scale(1); } 50% { opacity: 0.5; transform: rotate(-20deg) scale(1.1) translateX(-15px); } }
+        @keyframes lineMove5 { 0%, 100% { opacity: 0.1; transform: rotate(80deg) scale(1); } 50% { opacity: 0.6; transform: rotate(80deg) scale(1.2) translateX(10px); } }
+        @keyframes lineMove6 { 0%, 100% { opacity: 0.15; transform: rotate(-50deg) scale(1); } 50% { opacity: 0.4; transform: rotate(-50deg) scale(1.1) translateX(25px); } }
+        @keyframes lineMove7 { 0%, 100% { opacity: 0.1; transform: rotate(25deg) scale(1); } 50% { opacity: 0.5; transform: rotate(25deg) scale(1.3) translateX(-20px); } }
+        @keyframes lineMove8 { 0%, 100% { opacity: 0.2; transform: rotate(-75deg) scale(1); } 50% { opacity: 0.4; transform: rotate(-75deg) scale(1.1) translateX(15px); } }
+        @keyframes lineMove9 { 0%, 100% { opacity: 0.1; transform: rotate(55deg) scale(1); } 50% { opacity: 0.6; transform: rotate(55deg) scale(1.2) translateX(-10px); } }
+        @keyframes lineMove10 { 0%, 100% { opacity: 0.15; transform: rotate(-10deg) scale(1); } 50% { opacity: 0.5; transform: rotate(-10deg) scale(1.1) translateX(30px); } }
+
+        /* Content container with 500px max-width */
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .hero-subtitle {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #3d3c4a;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: subtitleReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-subtitle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(61, 60, 74, 0.1), transparent);
+            animation: shimmer 2s ease-in-out 1s;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 54px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: #1A1b21;
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+            animation: titleDramaticReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
+            position: relative;
+            background: linear-gradient(135deg, #1A1b21 0%, #2a2b35 50%, #1A1b21 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: titleDramaticReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards,
+                       gradientShift 4s ease-in-out 2.5s infinite;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1A1b21, #3d3c4a, #1A1b21);
+            animation: underlineGrow 1s ease-out 2.3s forwards;
+        }
+
+        .hero-description {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #1A1b21;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: descriptionReveal 1s ease-out 1.5s forwards;
+            position: relative;
+        }
+
+        .hero-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(26, 27, 33, 0.05), transparent);
+            animation: textSweep 1.5s ease-out 2s forwards;
+        }
+
+        /* Enhanced Text Animations */
+        @keyframes subtitleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                filter: blur(3px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes titleDramaticReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9) rotateX(15deg);
+                filter: blur(5px);
+                text-shadow: 0 10px 20px rgba(26, 27, 33, 0.3);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(10px) scale(0.98) rotateX(5deg);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+                filter: blur(0px);
+                text-shadow: 0 5px 15px rgba(26, 27, 33, 0.1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes underlineGrow {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes descriptionReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes textSweep {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; left: 100%; }
+        }
+
+        /* Hover effects for enhanced interaction */
+        .hero-title:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+            text-shadow: 0 8px 25px rgba(26, 27, 33, 0.15);
+        }
+
+        .hero-content:hover .hero-subtitle {
+            color: #2a2b35;
+            transition: color 0.3s ease;
+        }
+
+        /* Text glow effect on hover */
+        @media (hover: hover) {
+            .hero-title:hover {
+                animation: titleGlow 0.5s ease-in-out;
+            }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px rgba(26, 27, 33, 0.1)); 
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px rgba(26, 27, 33, 0.2)); 
+            }
+        }
+
+        /* Complete Responsive Design */
+        @media screen and (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+                padding: 15px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .hero-title {
+                font-size: 48px;
+                margin-bottom: 25px;
+            }
+            
+            .hero-subtitle {
+                margin-bottom: 15px;
+                font-size: 15px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            /* Reduce particles on mobile for performance */
+            .particles-container {
+                opacity: 0.6;
+            }
+
+            .particle:nth-child(n+11) {
+                display: none;
+            }
+
+            /* Simplify lines on mobile */
+            .line:nth-child(n+6) {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-section {
+                min-height: 70vh;
+                padding: 10px;
+            }
+            
+            .hero-content {
+                padding: 0 10px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+            
+            .hero-description {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            /* Further reduce particles */
+            .particle:nth-child(n+8) {
+                display: none;
+            }
+
+            /* Keep only essential lines */
+            .line:nth-child(n+4) {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            .hero-section {
+                padding: 8px;
+                min-height: 65vh;
+            }
+
+            .hero-content {
+                padding: 0 8px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                margin-bottom: 18px;
+            }
+            
+            .hero-subtitle {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+            
+            .hero-description {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+
+            /* Minimal particles for smallest screens */
+            .particle:nth-child(n+6) {
+                display: none;
+            }
+
+            .line:nth-child(n+3) {
+                display: none;
+            }
+        }
+
+        /* Ultra-wide screen optimization */
+        @media screen and (min-width: 1400px) {
+            .hero-content {
+                max-width: 500px; /* Keep consistent max-width */
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 10px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+                line-height: 1.3;
+            }
+        }
+
+        /* High DPI displays optimization */
+        @media screen and (-webkit-min-device-pixel-ratio: 2), 
+               screen and (min-resolution: 192dpi) {
+            .particle {
+                transform: translateZ(0);
+            }
+        }
+
+        /* Ensure proper sizing for Bubble.io */
+        .hero-section * {
+            box-sizing: border-box;
+        }
+        
+        /* Force hardware acceleration for smooth animations */
+        .hero-content > *,
+        .particle,
+        .line {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            .particle,
+            .line,
+            .hero-subtitle::before,
+            .hero-title::after,
+            .hero-description::before {
+                animation: none !important;
+            }
+            
+            .hero-subtitle,
+            .hero-title,
+            .hero-description {
+                animation: fadeInSimple 0.5s ease-out forwards !important;
+            }
+        }
+
+        @keyframes fadeInSimple {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Enhanced mobile text effects */
+        @media screen and (max-width: 768px) {
+            .hero-title::after {
+                height: 2px; /* Thinner underline on mobile */
+            }
+            
+            .hero-subtitle::before,
+            .hero-description::before {
+                display: none; /* Disable sweep effects on mobile for performance */
+            }
+
+            /* Adjust video opacity on mobile for better performance */
+            .hero-video {
+                opacity: 0.6;
+            }
+
+            .hero-overlay {
+                background: linear-gradient(
+                    135deg, 
+                    rgba(255, 255, 255, 0.9) 0%, 
+                    rgba(255, 255, 255, 0.85) 50%, 
+                    rgba(255, 255, 255, 0.9) 100%
+                );
+            }
+        }
+
+        /* Video performance optimizations */
+        @media screen and (max-width: 480px) {
+            .hero-video {
+                opacity: 0.4;
+                filter: blur(1px); /* Slight blur to reduce detail on small screens */
+            }
+
+            .hero-overlay {
+                background: linear-gradient(
+                    135deg, 
+                    rgba(255, 255, 255, 0.95) 0%, 
+                    rgba(255, 255, 255, 0.9) 50%, 
+                    rgba(255, 255, 255, 0.95) 100%
+                );
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <!-- Video Background -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://edc0f6626b7dff6e0f133fa5bc533306.cdn.bubble.io/f1752714717141x750120161139345200/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%281%29.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video -->
+        </video>
+
+        <!-- Video Overlay for text readability -->
+        <div class="hero-overlay"></div>
+
+        <!-- Enhanced Animated Particles -->
+        <div class="particles-container">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <!-- Enhanced Connection Lines -->
+        <div class="connection-lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <div class="hero-content">
+            <h3 class="hero-subtitle">Leading the Future of Structural & Architectural Design Where innovation meets precision</h3>
+            <h1 class="hero-title">Innovative Structural Consultants</h1>
+            <h2 class="hero-description">We deliver code-compliant, high-performance Engineering and Architectural solutions with AI-driven automation and quality control. Our Experienced, licensed team turns complex building programs into consistent result across residential, multifamily, high-rise, mixed-use and commercial project into long-term value for our clients</h2>
+        </div>
+    </section>
+</body>
+</html>
