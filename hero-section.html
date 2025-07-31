@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civil Engineering Hero Section</title>
+</head>
+<body>
+    <div id="hero-section">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+            
+            #hero-section {
+                position: relative;
+                min-height: 100vh;
+                background: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                font-family: 'Open Sans', sans-serif;
+            }
+            
+            .architectural-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.08;
+                z-index: 1;
+            }
+            
+            .blueprint-lines {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-image: 
+                    linear-gradient(90deg, #3D3C4A 1px, transparent 1px),
+                    linear-gradient(180deg, #3D3C4A 1px, transparent 1px);
+                background-size: 40px 40px;
+                animation: blueprintMove 20s linear infinite;
+            }
+            
+            .floating-shapes {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+            }
+            
+            .shape {
+                position: absolute;
+                background: linear-gradient(135deg, rgba(61, 60, 74, 0.1), rgba(26, 27, 33, 0.05));
+                border-radius: 8px;
+                animation: float 8s ease-in-out infinite;
+                box-shadow: 0 10px 30px rgba(61, 60, 74, 0.1);
+            }
+            
+            .shape:nth-child(1) {
+                width: 80px;
+                height: 120px;
+                top: 15%;
+                left: 10%;
+                animation-delay: 0s;
+                transform: rotate(15deg);
+            }
+            
+            .shape:nth-child(2) {
+                width: 60px;
+                height: 60px;
+                top: 70%;
+                right: 15%;
+                animation-delay: 2s;
+                transform: rotate(-20deg);
+            }
+            
+            .shape:nth-child(3) {
+                width: 100px;
+                height: 40px;
+                top: 40%;
+                left: 5%;
+                animation-delay: 4s;
+                transform: rotate(45deg);
+            }
+            
+            .shape:nth-child(4) {
+                width: 70px;
+                height: 90px;
+                top: 20%;
+                right: 8%;
+                animation-delay: 6s;
+                transform: rotate(-30deg);
+            }
+            
+            .content-container {
+                position: relative;
+                z-index: 10;
+                max-width: 600px;
+                padding: 40px 20px;
+                text-align: center;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                box-shadow: 
+                    0 20px 60px rgba(26, 27, 33, 0.1),
+                    0 8px 32px rgba(61, 60, 74, 0.08);
+                animation: containerFloat 6s ease-in-out infinite;
+            }
+            
+            .hero-h3 {
+                font-size: 16px;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 600;
+                color: #3D3C4A;
+                margin-bottom: 20px;
+                min-height: 2em;
+                line-height: 1.4;
+            }
+            
+            .typewriter {
+                border-right: 2px solid #3D3C4A;
+                white-space: nowrap;
+                overflow: hidden;
+                animation: blink 1s infinite;
+            }
+            
+            .hero-h1 {
+                font-size: 54px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                color: #1A1B21;
+                margin: 30px 0;
+                line-height: 1.2;
+                opacity: 0;
+                transform: translateY(30px);
+                animation: revealText 1s ease-out 3s forwards;
+            }
+            
+            .hero-h1 .word {
+                display: inline-block;
+                margin-right: 0.3em;
+                opacity: 0;
+                transform: translateY(50px) rotateX(90deg);
+                animation: wordReveal 0.8s ease-out forwards;
+            }
+            
+            .hero-h1 .word:nth-child(1) { animation-delay: 3.2s; }
+            .hero-h1 .word:nth-child(2) { animation-delay: 3.4s; }
+            .hero-h1 .word:nth-child(3) { animation-delay: 3.6s; }
+            
+            .hero-h2 {
+                font-size: 16px;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 400;
+                color: #1A1B21;
+                line-height: 1.6;
+                margin-top: 30px;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 1s ease-out 4.5s forwards;
+            }
+            
+            .shadow-orb {
+                position: absolute;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(61, 60, 74, 0.15) 0%, transparent 70%);
+                animation: orbFloat 12s ease-in-out infinite;
+                z-index: 5;
+            }
+            
+            .orb-1 {
+                width: 300px;
+                height: 300px;
+                top: -100px;
+                right: -150px;
+                animation-delay: 0s;
+            }
+            
+            .orb-2 {
+                width: 200px;
+                height: 200px;
+                bottom: -100px;
+                left: -100px;
+                animation-delay: 6s;
+            }
+            
+            .orb-3 {
+                width: 150px;
+                height: 150px;
+                top: 50%;
+                left: -75px;
+                animation-delay: 3s;
+            }
+            
+            @keyframes blueprintMove {
+                0% { transform: translate(0, 0); }
+                100% { transform: translate(40px, 40px); }
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)); }
+                50% { transform: translateY(-20px) rotate(var(--rotation, 0deg)); }
+            }
+            
+            @keyframes containerFloat {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            @keyframes orbFloat {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                33% { transform: translate(-20px, -30px) scale(1.1); }
+                66% { transform: translate(20px, -10px) scale(0.9); }
+            }
+            
+            @keyframes blink {
+                0%, 50% { border-color: #3D3C4A; }
+                51%, 100% { border-color: transparent; }
+            }
+            
+            @keyframes revealText {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes wordReveal {
+                0% { 
+                    opacity: 0; 
+                    transform: translateY(50px) rotateX(90deg); 
+                }
+                100% { 
+                    opacity: 1; 
+                    transform: translateY(0) rotateX(0deg); 
+                }
+            }
+            
+            @keyframes fadeInUp {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .hero-h1 {
+                    font-size: 48px;
+                }
+                
+                .content-container {
+                    margin: 20px;
+                    padding: 30px 15px;
+                }
+                
+                .shape {
+                    opacity: 0.5;
+                }
+                
+                .shape:nth-child(1) {
+                    width: 60px;
+                    height: 90px;
+                }
+                
+                .shape:nth-child(2) {
+                    width: 45px;
+                    height: 45px;
+                }
+                
+                .shape:nth-child(3) {
+                    width: 75px;
+                    height: 30px;
+                }
+                
+                .shape:nth-child(4) {
+                    width: 50px;
+                    height: 65px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .hero-h1 {
+                    font-size: 42px;
+                }
+                
+                .content-container {
+                    max-width: 90%;
+                }
+            }
+        </style>
+        
+        <!-- Background Effects -->
+        <div class="architectural-bg">
+            <div class="blueprint-lines"></div>
+        </div>
+        
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <div class="shadow-orb orb-1"></div>
+        <div class="shadow-orb orb-2"></div>
+        <div class="shadow-orb orb-3"></div>
+        
+        <!-- Main Content -->
+        <div class="content-container">
+            <h3 class="hero-h3">
+                <span id="typewriter" class="typewriter" aria-label="Leading the Future of Structural & Architectural Design Where innovation meets precision"></span>
+            </h3>
+            
+            <h1 class="hero-h1" aria-label="Innovative Structural Consultants">
+                <span class="word">Innovative</span>
+                <span class="word">Structural</span>
+                <span class="word">Consultants</span>
+            </h1>
+            
+            <h2 class="hero-h2">
+                We deliver code-compliant, high-performance Engineering and Architectural solutions with AI-driven automation and quality control. Our Experienced, licensed team turns complex building programs into consistent result across residential, multifamily, high-rise, mixed-use and commercial project into long-term value for our clients
+            </h2>
+        </div>
+        
+        <script>
+            // Typewriter Effect
+            const text = "Leading the Future of Structural & Architectural Design Where innovation meets precision";
+            const typewriterElement = document.getElementById('typewriter');
+            let index = 0;
+            
+            function typeWriter() {
+                if (index < text.length) {
+                    typewriterElement.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 50);
+                } else {
+                    setTimeout(() => {
+                        typewriterElement.classList.remove('typewriter');
+                    }, 1000);
+                }
+            }
+            
+            // Start typewriter effect on load
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(typeWriter, 500);
+            });
+            
+            // Dynamic shadow movement
+            const orbs = document.querySelectorAll('.shadow-orb');
+            const hero = document.getElementById('hero-section');
+            
+            hero.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { innerWidth, innerHeight } = window;
+                
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 0.02;
+                    const x = (clientX - innerWidth / 2) * speed;
+                    const y = (clientY - innerHeight / 2) * speed;
+                    
+                    orb.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            });
+            
+            // Parallax effect for shapes
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const shapes = document.querySelectorAll('.shape');
+                
+                shapes.forEach((shape, index) => {
+                    const speed = 0.1 + (index * 0.05);
+                    shape.style.transform += ` translateY(${scrolled * speed}px)`;
+                });
+            });
+            
+            // Add random rotation to shapes
+            document.querySelectorAll('.shape').forEach((shape, index) => {
+                const rotation = Math.random() * 360;
+                shape.style.setProperty('--rotation', `${rotation}deg`);
+            });
+        </script>
+    </div>
+</body>
+</html>
