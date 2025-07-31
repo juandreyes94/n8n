@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innovative Structural Consultants - Hero Section</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,19 +13,19 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             overflow-x: hidden;
         }
 
         .hero-section {
             position: relative;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            color: white;
+            color: #1A1b21;
         }
 
         /* Particle Canvas */
@@ -51,7 +51,7 @@
 
         .geometric-shape {
             position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(26, 27, 33, 0.1);
             border-radius: 4px;
         }
 
@@ -98,32 +98,32 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #3d3c4a;
             margin-bottom: 1rem;
             opacity: 0;
             animation: slideUp 1s ease-out 0.5s forwards;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 54px;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1A1b21;
             opacity: 0;
             animation: slideUp 1s ease-out 1s forwards;
         }
 
         .hero-description {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
             font-weight: 400;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.9);
+            color: #1A1b21;
             max-width: 900px;
             margin: 0 auto;
             opacity: 0;
@@ -145,7 +145,7 @@
         /* Typewriter Effect for Subtitle */
         .typewriter {
             overflow: hidden;
-            border-right: 2px solid rgba(255, 255, 255, 0.7);
+            border-right: 2px solid #3d3c4a;
             white-space: nowrap;
             animation: typing 3s steps(40, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
             max-width: 0;
@@ -158,7 +158,7 @@
 
         @keyframes blink-caret {
             from, to { border-color: transparent; }
-            50% { border-color: rgba(255, 255, 255, 0.7); }
+            50% { border-color: #3d3c4a; }
         }
 
         /* Responsive Design */
@@ -168,16 +168,16 @@
             }
             
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 16px;
             }
             
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 48px;
                 margin-bottom: 1.5rem;
             }
             
             .hero-description {
-                font-size: 1.1rem;
+                font-size: 16px;
                 line-height: 1.5;
             }
 
@@ -188,11 +188,11 @@
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 48px;
             }
             
             .hero-description {
-                font-size: 1rem;
+                font-size: 16px;
             }
         }
 
@@ -210,7 +210,7 @@
         .scroll-arrow {
             width: 30px;
             height: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(26, 27, 33, 0.6);
             border-top: none;
             border-left: none;
             transform: rotate(45deg);
@@ -277,18 +277,19 @@
             }
             
             createParticles() {
-                const particleCount = Math.min(100, Math.floor(this.canvas.width * this.canvas.height / 10000));
+                const particleCount = Math.min(120, Math.floor(this.canvas.width * this.canvas.height / 8000));
                 this.particles = [];
                 
                 for (let i = 0; i < particleCount; i++) {
                     this.particles.push({
                         x: Math.random() * this.canvas.width,
                         y: Math.random() * this.canvas.height,
-                        vx: (Math.random() - 0.5) * 0.5,
-                        vy: (Math.random() - 0.5) * 0.5,
-                        size: Math.random() * 2 + 1,
-                        opacity: Math.random() * 0.5 + 0.2,
-                        originalOpacity: Math.random() * 0.5 + 0.2
+                        vx: (Math.random() - 0.5) * 1.5,
+                        vy: (Math.random() - 0.5) * 1.5,
+                        size: Math.random() * 3 + 1,
+                        opacity: Math.random() * 0.8 + 0.3,
+                        originalOpacity: Math.random() * 0.8 + 0.3,
+                        acceleration: 0.02
                     });
                 }
             }
@@ -309,29 +310,44 @@
             
             updateParticles() {
                 this.particles.forEach(particle => {
+                    // Add dynamic acceleration
+                    particle.vx += (Math.random() - 0.5) * particle.acceleration;
+                    particle.vy += (Math.random() - 0.5) * particle.acceleration;
+                    
+                    // Limit velocity for smoother movement
+                    const maxSpeed = 2;
+                    particle.vx = Math.max(-maxSpeed, Math.min(maxSpeed, particle.vx));
+                    particle.vy = Math.max(-maxSpeed, Math.min(maxSpeed, particle.vy));
+                    
                     // Update position
                     particle.x += particle.vx;
                     particle.y += particle.vy;
                     
-                    // Boundary collision
-                    if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-                    if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+                    // Boundary collision with slight randomness
+                    if (particle.x < 0 || particle.x > this.canvas.width) {
+                        particle.vx *= -0.8;
+                        particle.vx += (Math.random() - 0.5) * 0.5;
+                    }
+                    if (particle.y < 0 || particle.y > this.canvas.height) {
+                        particle.vy *= -0.8;
+                        particle.vy += (Math.random() - 0.5) * 0.5;
+                    }
                     
                     // Keep within bounds
                     particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
                     particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
                     
-                    // Mouse interaction
+                    // Enhanced mouse interaction
                     if (this.isMouseOver) {
                         const dx = this.mouse.x - particle.x;
                         const dy = this.mouse.y - particle.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < 150) {
-                            const force = (150 - distance) / 150;
-                            particle.opacity = particle.originalOpacity + force * 0.5;
-                            particle.vx += dx * force * 0.0001;
-                            particle.vy += dy * force * 0.0001;
+                        if (distance < 200) {
+                            const force = (200 - distance) / 200;
+                            particle.opacity = Math.min(1, particle.originalOpacity + force * 0.7);
+                            particle.vx += dx * force * 0.0005;
+                            particle.vy += dy * force * 0.0005;
                         } else {
                             particle.opacity = particle.originalOpacity;
                         }
@@ -342,8 +358,8 @@
             }
             
             drawConnections() {
-                this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                this.ctx.lineWidth = 0.5;
+                this.ctx.strokeStyle = 'rgba(26, 27, 33, 0.15)';
+                this.ctx.lineWidth = 0.8;
                 
                 for (let i = 0; i < this.particles.length; i++) {
                     for (let j = i + 1; j < this.particles.length; j++) {
@@ -351,9 +367,9 @@
                         const dy = this.particles[i].y - this.particles[j].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < 120) {
-                            const opacity = (120 - distance) / 120 * 0.2;
-                            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        if (distance < 140) {
+                            const opacity = (140 - distance) / 140 * 0.3;
+                            this.ctx.strokeStyle = `rgba(26, 27, 33, ${opacity})`;
                             this.ctx.beginPath();
                             this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                             this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
@@ -365,7 +381,7 @@
             
             drawParticles() {
                 this.particles.forEach(particle => {
-                    this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                    this.ctx.fillStyle = `rgba(26, 27, 33, ${particle.opacity})`;
                     this.ctx.beginPath();
                     this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                     this.ctx.fill();
